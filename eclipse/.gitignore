@@ -2,3 +2,5 @@
 /logs/
 /options.txt
 /.metadata/
+/crash-reports/
+/.recommenders/
