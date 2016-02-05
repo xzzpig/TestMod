@@ -1,4 +1,4 @@
-package git.menu;
+package com.github.xzzpig.testmod;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;

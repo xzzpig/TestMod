@@ -13,12 +13,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class MenuHandler {
 	public static MenuHandler instance = new MenuHandler();
-	private ServerData field_146811_z;
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void openMainMenu(GuiOpenEvent event) throws IOException {
+		System.out.println(event.gui);
 		if (event.gui instanceof GuiMainMenu) {
-			event.gui = new Menu();
+	    	System.out.println("loadGui");
+			event.gui = new NewMenu();
+	    	//event.gui.mc.displayGuiScreen(new TestMenu());
+	    	System.out.println("GuiLoadFinish");
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package git.menu;
+package com.github.xzzpig.testmod;
 
 public class ConfigVar
 {

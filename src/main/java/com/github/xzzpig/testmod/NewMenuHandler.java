@@ -1,4 +1,4 @@
-package git.menu;
+package com.github.xzzpig.testmod;
 
 import java.io.IOException;
 
