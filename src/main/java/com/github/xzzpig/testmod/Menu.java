@@ -23,7 +23,7 @@ public class Menu
 	{
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
-		//¶ÁÈ¡ÅäÖÃÎÄ¼ş
+		//è¯»å–é…ç½®æ–‡ä»¶
 		ConfigVar.onlinecheck = config.get("Online", "Check", false).getBoolean();
 		ConfigVar.version = config.get("Online", "Version", 1.0).getDouble();
 		ConfigVar.announcementcheck = config.get("Online", "zAnnouncementCheck", false).getBoolean();
@@ -36,7 +36,7 @@ public class Menu
 		ConfigVar.Captain = config.get("Server", "Captain", "Minecraft 1.7.10").getString();
 		ConfigVar.announcement = config.get("Server", "Announcement", "").getString();
 		ConfigVar.announcementmove = config.get("Server", "AnnouncementMove", false).getBoolean();
-		//½áÊø¶ÁÈ¡
+		//ç»“æŸè¯»å–
 		config.save();
 		//Display.setTitle(ConfigVar.Captain);
 		//MinecraftForge.EVENT_BUS.register(NewMenuHandler.instance);

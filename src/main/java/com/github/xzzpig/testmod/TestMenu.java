@@ -11,11 +11,15 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.GuiYesNoCallback;
+import net.minecraft.client.multiplayer.ServerData;
 
 import org.apache.commons.io.Charsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+
+import com.github.xzzpig.pigapi.TData;
+import com.github.xzzpig.pigapi.tcp.Client;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -29,6 +33,8 @@ public class TestMenu extends GuiScreen implements GuiYesNoCallback
     private GuiTextField text_passowrd;
     private GuiButton button_login;
     private static final String __OBFID = "CL_00000695";
+    public static String message,result = "";
+    
 	
     public TestMenu()
     {
@@ -58,7 +64,7 @@ public class TestMenu extends GuiScreen implements GuiYesNoCallback
         this.buttonList.clear();
 //        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 18, I18n.format("addServer.add", new Object[0])));
 //        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 120 + 18, I18n.format("gui.cancel", new Object[0])));
-        this.buttonList.add(this.button_login = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 72,"µÇÂ¼²¢½øÈë·şÎñÆ÷" ));
+        this.buttonList.add(this.button_login = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 72,"ç™»å½•å¹¶è¿›å…¥æœåŠ¡å™¨" ));
         this.text_passowrd = new GuiTextField(this.fontRendererObj, this.width / 2 - 100, 66, 200, 20);
         this.text_passowrd.setFocused(true);
         //this.field_146309_g.setText(this.field_146311_h.serverName);
@@ -81,9 +87,25 @@ public class TestMenu extends GuiScreen implements GuiYesNoCallback
     {
         if (!button.enabled)
         	return;
+        if(button.id == 0)
+        	onLoginButtonClick();
     }
     
-    /**
+    private void onLoginButtonClick() {
+    	message = "å¼€å§‹è¿æ¥æœåŠ¡å™¨";
+    	try {
+			new Client("xzz2.xzzpig.club",10727);
+		} catch (Exception e) {
+			message = "æœåŠ¡å™¨è¿æ¥å¤±è´¥";
+			return;
+		}
+    	Client client = Client.client;
+    	client.sendData(new TData().setString("password",button_login.displayString));
+		message = "ç™»å½•æˆåŠŸ";
+    }
+
+
+	/**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
     protected void keyTyped(char c, int id)
@@ -120,12 +142,14 @@ public class TestMenu extends GuiScreen implements GuiYesNoCallback
      */
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
-    	System.out.println("drawScreen()Start");
         this.drawBackground(10);
-        this.drawCenteredString(this.fontRendererObj, "µÇÂ¼½çÃæ", this.width / 2, 17, 16777215);
-        this.drawString(this.fontRendererObj, "ÃÜÂë:", this.width / 2 - 100, 53, 10526880);
+        this.drawCenteredString(this.fontRendererObj, "ç™»å½•ç•Œé¢", this.width / 2, 17, 16777215);
+        this.drawString(this.fontRendererObj, "å¯†ç :", this.width / 2 - 100, 53, 10526880);
         this.text_passowrd.drawTextBox();
+        if(message != null)
+        	this.drawString(this.fontRendererObj, "ä¿¡æ¯:"+message, this.width / 2 - 100, 100, 10526880);
+        if(result.equalsIgnoreCase("success"))
+        	FMLClientHandler.instance().connectToServer(this, new ServerData("TestServer", "xzz2.xzzpig.club;25565"));
         super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
-    	System.out.println("drawScreen()Finish");
     }
 }

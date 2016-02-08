@@ -4,6 +4,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.Display;
 
+import com.github.xzzpig.pigapi.event.Event;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -27,7 +29,8 @@ public class TestMain{
 	@SideOnly(Side.CLIENT)
 	public void preInit(FMLPreInitializationEvent e)
 	{
-		Display.setTitle("Test");
+		//Display.setTitle("Test");
 		MinecraftForge.EVENT_BUS.register(MenuHandler.instance);
+		Event.registListener(new TestListener());
 	}
 }

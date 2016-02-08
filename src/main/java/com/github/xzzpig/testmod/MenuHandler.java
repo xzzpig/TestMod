@@ -19,7 +19,7 @@ public class MenuHandler {
 		System.out.println(event.gui);
 		if (event.gui instanceof GuiMainMenu) {
 	    	System.out.println("loadGui");
-			event.gui = new NewMenu();
+			event.gui = new TestMenu();
 	    	//event.gui.mc.displayGuiScreen(new TestMenu());
 	    	System.out.println("GuiLoadFinish");
 		}
